@@ -12,7 +12,12 @@ https://github.com/dting/fcc-angular-fullstack-docker
 
 ## Why
 
-Using vagrant allows for separating the host os from the dev environment. Packages installed for the project don't end up on the host system. Packages required by the project are tracked in the provisioning files. When on boarding a new member to the project, they can have the same dev environment up and running quickly.
+Using vagrant allows for: 
+
+* Separating the host os from the dev environment (Packages installed for the project don't end up on the host system). 
+* Keeping packages required by the project are tracked in the provisioning files. 
+* On-boarding a new member to the project with identical dev environments, up and running quickly.
+* Mimicing production environments on local machines.
 
 ## Prerequisites
 
