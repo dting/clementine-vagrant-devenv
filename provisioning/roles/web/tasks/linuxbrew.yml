@@ -1,0 +1,37 @@
+---
+- name: Install the packages for linuxbrew
+  apt: pkg={{ item }} state=installed
+  sudo: yes
+  with_items:
+    - build-essential
+    - make
+    - cmake
+    - scons
+    - curl
+    - git
+    - ruby
+    - autoconf
+    - automake
+    - autoconf-archive
+    - gettext
+    - libtool
+    - flex
+    - bison
+    - m4
+    - ruby
+    - texinfo
+    - libbz2-dev
+    - libcurl4-openssl-dev
+    - libexpat-dev
+    - libncurses-dev
+    - zlib1g-dev
+  tags: linuxbrew
+
+- name: Install linuxbrew
+  sudo: no
+  shell: yes '' | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+  tags: linuxbrew
+
+- lineinfile: "dest=/home/vagrant/.bashrc line='export PATH=\"$HOME/.linuxbrew/bin:$PATH\"' state=present"
+- lineinfile: "dest=/home/vagrant/.bashrc line='export MANPATH=\"$HOME/.linuxbrew/share/man:$MANPATH\"' state=present"
+- lineinfile: "dest=/home/vagrant/.bashrc line='export INFOPATH=\"$HOME/.linuxbrew/share/info:$INFOPATH\"' state=present"

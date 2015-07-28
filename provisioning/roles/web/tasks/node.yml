@@ -1,0 +1,35 @@
+---
+- name: Install nodejs
+  sudo: no
+  shell: /home/vagrant/.linuxbrew/bin/brew install node
+  tags: nodejs
+
+- name: Bower | Install Bower
+  npm: name=bower global=yes state=present
+  environment:
+    PATH: /home/vagrant/.linuxbrew/bin:$PATH
+  tags: bower
+
+- name: Gulp | Install Gulp
+  npm: name=gulp global=yes state=present
+  environment:
+    PATH: /home/vagrant/.linuxbrew/bin:$PATH
+  tags: bower
+
+- name: stat project_folder
+  stat: path=/vagrant/project
+  register: project_folder
+
+- name: Clementinejs | Install clementinejs
+  sudo: no
+  npm: name=clementinejs global=no path=/tmp state=present
+  environment:
+    PATH: /home/vagrant/.linuxbrew/bin:$PATH
+  when: not project_folder.stat.exists
+  tags: clementinejs
+
+- name: Rename clementine folder
+  sudo: no
+  command: mv /tmp/node_modules/clementinejs /vagrant/project
+  when: not project_folder.stat.exists
+  tags: clementinejs
